@@ -1,13 +1,18 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { NextAuthOptions } from "next-auth";
+import Github from "next-auth/providers/github";
 export const authoptions: NextAuthOptions = {
-  // authoptions object specifies the signin serivice provider (google in this case) and also specifies the
+  // authoptions object specifies the signin serivice provider (google and github in this case) and also specifies the
   // credientials( i.e clientid, client secret ) required to access their sigin facility via next auth and we specify the page from which we are signning in
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    Github({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,

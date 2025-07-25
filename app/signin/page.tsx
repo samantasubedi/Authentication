@@ -21,6 +21,14 @@ function signin() {
           {" "}
           sign in with google
         </Button>
+        <Button
+          variant="default"
+          className="bg-blue-700"
+          onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
+        >
+          {" "}
+          sign in with github
+        </Button>
       </div>
       <div className="flex justify-end">
         <Button
