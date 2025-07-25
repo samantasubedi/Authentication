@@ -1,16 +1,16 @@
 "use client";
-import { getServerSession } from "next-auth";
-import { authoptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { signOut } from "next-auth/react";
-export default async function Dashboard() {
-  const session = await getServerSession(authoptions);
-  if (!session) {
-    redirect("/signin");
+import { signOut, useSession } from "next-auth/react";
+export default function Dashboard() {
+  const session = useSession();
+
+  if (session.status === "unauthenticated") {
+    return redirect("/signin");
   }
-  const username = session.user?.name;
-  const useremail = session.user?.email;
+
+  const username = session.data?.user?.name;
+  const useremail = session.data?.user?.email;
 
   return (
     <div>
@@ -23,8 +23,8 @@ export default async function Dashboard() {
           <img
             alt="user image"
             src={
-              session.user?.image
-                ? session.user.image
+              session.data?.user?.image
+                ? session.data?.user.image
                 : "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
             }
             onError={(e) => {
