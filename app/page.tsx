@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 function Page() {
   const router = useRouter();
   const handleclick = () => {
-    router.push("./signin");
+    router.push("/signin");
   };
   return (
     <>
